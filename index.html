@@ -1,10 +1,226 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Are You Lucky Enough</title>
+<title>Home</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 </head>
 <body>
-  <p>First Line</p>
+	<!--- Header Starts Here --->
+	<div class="header">
+		<div class="container">
+			<div class="logo">
+				<a href="index.html"><img src="images/logo.png" alt=""/></a>
+			</div>
+			<div class="navigation">
+				<span class="menu"><img src="images/nav.png" alt="" /></span>
+				<ul class="nav">
+					<li><a href="index.html">Cube</a></li> <lable>/</lable>
+					<li><a href="#">About</a></li>
+				</ul>
+			</div>
+			<script>
+					$( "span.menu" ).click(function() {
+					  $( ".navigation ul.nav" ).slideToggle( "slow", function() {
+					    // Animation complete.
+					  });
+					});
+				</script>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<!--- Header Ends Her -->
+	<!-- Banner Starts Here --->
+	<script type="text/javascript">
+		var numstr = ["0","1","2","3","4","5","6","7","8","9"];
+		var targets = [42n, 114n, 165n, 390n, 579n, 627n, 633n, 732n, 795n, 906n, 921n, 975n];
+		var e10 = [1n, 10n, 100n, 1000n, 10000n, 100000n, 1000000n, 10000000n, 100000000n, 1000000000n, 10000000000n, 100000000000n, 1000000000000n, 10000000000000n, 100000000000000n, 1000000000000000n, 10000000000000000n, 100000000000000000n, 1000000000000000000n, 10000000000000000000n];
+		function randint(n) {
+			return Math.floor(Math.random()*(n+1));
+		}
+		function cube_root(n) {
+			var dn = Math.floor(n.toString().length / 3) + 1;
+			var i;
+			var j;
+			var r = 0n;
+			var ra;
+			for (i = dn; i >= 1; i--)
+			{
+				for (j = 1; j < 10; j++)
+				{
+					ra = r + e10[i - 1];
+					if (r ** 3n <= n && ra ** 3n > n)
+					{
+						break;
+					}
+					r = ra;
+				}
+			}
+			return r;
+		}
+		function gennumbers(d) {
+			var i;
+			var j;
+			var l;
+			var dif = false;
+			var r1 = BigInt(randint(8) + 1) * e10[d - 1];
+			var r2;
+			var e1;
+			var e2;
+			var te;
+			var e3;
+			var er1;
+			var er2;
+			if (Math.random() < 0.9)
+			{
+				r2 = r1;
+			}
+			else
+			{
+				r2 = r1 - e10[d - 1];
+				dif = true;
+			}
+			for (i = d - 1; i > 1; i--)
+			{
+				e1 = randint(9);
+				if (!dif)
+				{
+					e2 = randint(e1);
+					if (e2 < e1) dif = true;
+				}
+				else
+				{
+					e2 = randint(9);
+				}
+				r1 = r1 + BigInt(e1) * e10[i - 1];
+				r2 = r2 + BigInt(e2) * e10[i - 1];
+			}
+			for (i = 0; i < 10; i++)
+			for (j = 0; j < 10; j++)
+			{
+				e1 = r1 + BigInt(i);
+				e2 = r2 + BigInt(j);
+				te = e1 ** 3n - e2 ** 3n;
+				if (10000n > te && -10000n < te)
+				{
+					return [e1, e2, 0n, te, 2n];
+				}
+				e3 = cube_root(te);
+				er1 = te - e3 ** 3n;
+				er2 = te - (e3 + 1n) ** 3n;
+				for (l = 0; l < 12; l++)
+				{
+					if (er1 == targets || er1 == -targets)
+					{
+						return [e1, e2, e3, er1, 1n];
+					}
+					else if (er2 == targets || er2 == -targets)
+					{
+						return [e1, e2, e3 + 1n, er2, 1n];
+					}
+				}
+			}
+			return [e1, e2, e3, er1, 0n];
+		}
+		function run_cube() {
+			var r;
+			var noc = "";
+			if (Math.random() < 0.75)
+			{
+				r = gennumbers(17);
+			}
+			else
+			{
+				r = gennumbers(18);
+			}
+			if (r[4] == 1n)
+			{
+				noc = "Congratulations! " + r[0].toString() + "<sup>3</sup>-" + r[1].toString() + "<sup>3</sup>-" + r[2].toString() + "<sup>3</sup>=" + r[3].toString();
+			}
+			else if (r[4] == 0n)
+			{
+				noc = "As expected, " + r[0].toString() + "<sup>3</sup>-" + r[1].toString() + "<sup>3</sup>-" + r[2].toString() + "<sup>3</sup>=" + r[3].toString() + " Failed";
+			}
+			else if (r[4] == 2n)
+			{
+				noc = "Strange. Please check " + r[0].toString() + "<sup>3</sup>-" + r[1].toString() + "<sup>3</sup>-x<sup>3</sup>=" + r[3].toString();
+			}
+			$('#cube-intro').html(noc);
+			$('#try-it').html("Try Again");
+			if (r[4] != 0n)
+			{
+				$('#try-it').hide();
+			}
+		}
+	</script>
+	<div class="banner">
+		<div class="container">
+			<div class="banner-top" align="center">
+			<h1>Sums of Three Cubes</h1>
+			<p id="cube-intro" align="center">See if you are lucky enough to get a<sup>3</sup>+b<sup>3</sup>+c<sup>3</sup>=42, 114, 165, ...</p>
+			<a id="try-it" href="javascript:void(0)" onclick="run_cube()">Try It</a>
+			</div>
+		</div>
+	</div>
+	<!-- Banner Ends Here --->
+	<!-- Content starts Here --->
+	<div class="content">
+		<div class="container">
+			<span class="line"></span><a href="#" class="line-anchor">Sums of Three Cubes</a><span class="line"></span>
+				<div class="clearfix"></div>
+			<div class="content-middle">
+				<div class="row content-middle-row">
+					<div class="middle-row-column-right">
+						<i class="icon5"></i>
+						<p>In the mathematics of sums of powers, it is an open problem to characterize the numbers that can be expressed as a sum of three cubes of integers, allowing both positive and negative cubes in the sum.</p>
+						<p>Most recently, in 2019, Andrew Booker settled the n=33 case, by discovering that 33=8866128975287528<sup>3</sup>+(-8778405442862239)<sup>3</sup>+(-2736111468807040)<sup>3</sup>.</p>
+						<i class="icon7"></i>
+					</div>
+					<p class="from-wiki">From <a href="https://en.wikipedia.org/wiki/Sums_of_three_cubes" target="_blank" title="Wikipedia">Wikipedia</a></p>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<span class="line"></span><a href="#" class="line-anchor">About Me</a><span class="line"></span>
+				<div class="clearfix"></div>
+				<div class="content-bottom">
+					<div class="row content-bottom-row">
+						<div class="col-md-4 bottom-row-column">
+							<span class="loc"></span><p class="ph">Juzheng Li</p>
+							<div class="clearfix"></div>
+							<a href="mailto:lijuzheng09@gmail.com" class="mail-a">lijuzheng09@gmail.com</a>
+						</div>
+						<div class="col-md-3 bottom-row-column">
+							<span class="ad"></span><p class="ad">Zhonghang Science Building, 56 Zhichun Road, Beijing</p>
+							<div class="clearfix"></div>
+						</div>
+						<div class="col-md-5 bottom-row-column">
+							<p>If you find this page interesting, please consider donating to <a href="https://www.paypal.me/lijuzheng" target="_blank" title="me" class="donate-a">www.paypal.me/lijuzheng</a>. I will use it for my having fun in math and other personal matters.</p>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				
+		</div>
+	</div>
+	<!-- Content starts Here --->
+	<div class="footer">
+		<div class="container">
+			<ul class="social" style="display:none">
+				<li><i class="fa"></i></li>
+				<li><i class="tw"></i></li>
+				<li><i class="pin"></i></li>
+				<li><i class="in"></i></li>
+			</ul>
+			<p class="copyright">Copyright &copy; 2019. Juzheng Li All rights reserved. Template provided by <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a></p>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+
 </body>
 </html>
