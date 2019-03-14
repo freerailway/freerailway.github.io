@@ -109,6 +109,12 @@
 			{
 				e1 = r1 + BigInt(i　%　100);
 				e2 = r2 + BigInt(j　%　100);
+				if (e1 < e2) 
+				{
+					e3 = e1;
+					e1 = e2;
+					e2 = e3;
+				}
 				te = e1 ** 3n - e2 ** 3n;
 				e3 = cube_root(te);
 				er1 = te - e3 ** 3n;
