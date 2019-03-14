@@ -127,13 +127,18 @@
 		function run_cube() {
 			var r;
 			var noc = "";
-			if (Math.random() < 0.75)
+			var k = Math.random();
+			if (k < 0.75)
 			{
 				r = gennumbers(17);
 			}
-			else
+			else if (k < 0.93)
 			{
 				r = gennumbers(18);
+			}
+			else
+			{
+				r = gennumbers(19);
 			}
 			if (r[4] == 1n)
 			{
