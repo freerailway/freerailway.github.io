@@ -1,5 +1,6 @@
 # freerailway.github.io
 
-Theoretically, I am not the lucky person and there is no such lucky one.
-But since the universe is vast, Luck is something irrational.
-You may be the one.
+Theoretically, there is no such lucky person.  
+However, since the universe is vast, "Luck" is something irrational.  
+Computer is fast, but not so "lucky".  
+YOU may be the one.  
