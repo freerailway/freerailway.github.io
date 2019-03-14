@@ -107,10 +107,6 @@
 				e1 = r1 + BigInt(i);
 				e2 = r2 + BigInt(j);
 				te = e1 ** 3n - e2 ** 3n;
-				if (10000n > te && -10000n < te)
-				{
-					return [e1, e2, 0n, te, 2n];
-				}
 				e3 = cube_root(te);
 				er1 = te - e3 ** 3n;
 				er2 = te - (e3 + 1n) ** 3n;
@@ -146,10 +142,6 @@
 			else if (r[4] == 0n)
 			{
 				noc = "As expected, " + r[0].toString() + "<sup>3</sup>-" + r[1].toString() + "<sup>3</sup>-" + r[2].toString() + "<sup>3</sup>=" + r[3].toString() + " Failed";
-			}
-			else if (r[4] == 2n)
-			{
-				noc = "Strange. Please check " + r[0].toString() + "<sup>3</sup>-" + r[1].toString() + "<sup>3</sup>-x<sup>3</sup>=" + r[3].toString();
 			}
 			$('#cube-intro').html(noc);
 			$('#try-it').html("Try Again");
