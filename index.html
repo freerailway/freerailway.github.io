@@ -76,6 +76,8 @@
 			var e3;
 			var er1;
 			var er2;
+			var st1;
+			var st2;
 			if (Math.random() < 0.9)
 			{
 				r2 = r1;
@@ -100,22 +102,24 @@
 				r1 = r1 + BigInt(e1) * e10[i - 1];
 				r2 = r2 + BigInt(e2) * e10[i - 1];
 			}
-			for (i = 0; i < 100; i++)
-			for (j = 0; j < 100; j++)
+			st1 = randint(99);
+			st2 = randint(99);
+			for (i = st1; i < st1 + 33; i++)
+			for (j = st2; j < st2 + 33; j++)
 			{
-				e1 = r1 + BigInt(i);
-				e2 = r2 + BigInt(j);
+				e1 = r1 + BigInt(i　%　100);
+				e2 = r2 + BigInt(j　%　100);
 				te = e1 ** 3n - e2 ** 3n;
 				e3 = cube_root(te);
 				er1 = te - e3 ** 3n;
 				er2 = te - (e3 + 1n) ** 3n;
 				for (l = 0; l < 12; l++)
 				{
-					if (er1 == targets || er1 == -targets)
+					if (er1 == targets[l] || er1 == -targets[l])
 					{
 						return [e1, e2, e3, er1, 1n];
 					}
-					else if (er2 == targets || er2 == -targets)
+					else if (er2 == targets[l] || er2 == -targets[l])
 					{
 						return [e1, e2, e3 + 1n, er2, 1n];
 					}
@@ -124,7 +128,6 @@
 			return [e1, e2, e3, er1, 0n];
 		}
 		function run_cube() {
-			$('#try-it').css("color","#444");
 			var r;
 			var noc = "";
 			var k = Math.random();
@@ -154,7 +157,6 @@
 			{
 				$('#try-it').hide();
 			}
-			$('#try-it').css("color","#fff");
 		}
 	</script>
 	<div class="banner">
